@@ -1,0 +1,16 @@
+.user-profile-edit{
+    width: 600px;
+    margin: 0 auto;
+    padding: 35px;
+}
+.user-profile-edit .profile-bio{   
+    width: 100%;
+}
+.profile-btn{
+    width: 100%;
+}
+.user-pic-name{
+    width: 600px;
+    margin: 0 auto;
+    padding: 35px;
+}

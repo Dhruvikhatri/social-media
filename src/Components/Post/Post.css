@@ -1,0 +1,96 @@
+.post-container{
+    width: 610px;
+    border: 1px solid #dbdbdb;
+    /* height: 710px; */
+    margin-top: 20px;
+    background-color: #fff;
+    text-align: left;
+}
+.post-header{
+    height: 68px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+}
+.post-avatar{
+    min-width: 45px;
+    min-height: 45px;
+    margin: 10px;
+}
+.post-fullname{
+    font-weight: bold;
+    margin-top: 10px;
+
+}
+.post-image img{
+    width: 610px;
+}
+.post-analytics{
+    margin-left: 10px;
+    display: flex;
+}
+.post-analytics-btn{
+    display: flex;
+}
+.postreact{
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+}
+.post-analytics-count{
+    font-weight: bold;
+    display: flex;
+    font-size: 12.5px;
+    margin-top: 8px;
+}
+.post-comment .comment-txt{
+    margin: 5px 5px 5px 10px;
+    font-size: 13.5px;
+}
+.post-comment-input{
+    height: 32px;
+    border-radius: 0;
+}
+
+/* Upload Post Css */
+.add-post-container{
+    text-align: left;
+    margin-bottom: 20px;
+} 
+.add-post-container h3{
+    text-align: center;
+}
+input[type=file] {
+    font-size: medium;
+    display: block; 
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%
+}
+.caption{
+    display: block;
+    height: 58px;
+    width: 100%;
+}
+.post-caption{
+    font-weight: 500;
+    padding: 8px 8px 8px 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+.post-caption span{
+    font-weight: 400;
+}
+
+
+.addpost-btn{
+    display: block;
+    margin-top: 10px;
+    width: 100%
+}
+.post-comment-box{
+    display: flex;
+    height: 32px;
+}
+.post-comment-box .comment-btn{
+    color: #fff;
+    background-color: #1677ff;
+}

@@ -1,0 +1,83 @@
+body{
+    background-color: #fafafa;
+}
+.Loginpage-grid{
+    margin-top: 50px;
+}
+.Loginpage-main{
+    width: 350px;
+    padding-bottom: 25px;
+    border: 1px solid #aaaa;
+    display: block;
+    margin: 80px auto 0;
+    background-color: #fff;
+}
+.Loginpage-main h2{
+    text-align: center;
+}
+.loginpage-signin{
+    width: 300px;
+    display: block;
+    margin: 30px auto 0;
+}
+.signup-fullname{
+    margin-bottom: 25px;
+}
+.loginpage-signin .loginpage-email{
+    margin-bottom: 25px;
+}
+.loginpage-signin .loginpage-password{
+    margin-bottom: 25px;
+}
+.loginpage-or{
+    position: relative;
+    margin-top: 8px;
+}
+.loginpage-or-txt{
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.loginpage-or-txt::before{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    background-color: #707070;
+    width: 100px;
+    height: 1.5px;
+    left: 0;
+    bottom: 10px;
+}
+.loginpage-or-txt::after{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    background-color: #707070;
+    width: 100px;
+    height: 1.5px;
+    right: 0;
+    bottom: 10px;
+}
+.login-forgot{
+    font-size: 14px;
+    line-height: 16px;
+    color: #5252ff;
+    margin-top: 62px;
+    text-align: center;
+}
+.login-signup{
+    margin-top: 8px;
+    text-align: center;
+}
+.signup-txt{
+    font-size: 16px;
+    line-height: 18px;
+    color: rgb(50, 50, 50);
+} 
+.signup-txt span{
+    color: #5252ff;
+}
+.login-content{
+    text-align: center;
+}

@@ -1,0 +1,29 @@
+.navbar-barcontent{
+    height: 58px;
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    text-align: center;
+}
+.navbar-logo-name{
+    margin-top: 10px;
+}
+.navbar-search{
+    width: 350px;
+    margin-top: 10px;
+}
+.navbar-navigation{
+    display: flex;
+}
+.navbar-navigation img{
+    width: 25px;
+}
+.navbar-img{
+    margin: 10px 8px;
+}
+.avatar{
+    max-width: 28px;
+    max-height: 28px;
+}
+.logout-btn{
+    margin-top: 10px;
+}
