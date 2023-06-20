@@ -1,33 +1,51 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, {ChangeEvent, useRef, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "antd";
-
-import { storage, db } from '../../firebase'
-import firebase from 'firebase/compat/app'
+// import firebase from 'firebase/compat/app'
+import firebase from "../../firebase"
 import "firebase/compat/firestore";
-import 'firebase/compat/storage';
 import 'firebase/compat/auth'
-import { auth } from '../../firebase'
 import Post from "./Post";
+const auth = firebase.auth();
+const db = firebase.firestore();
+interface PostData {
+    id: string;
+    post: {
+      timestamp: firebase.firestore.Timestamp;
+      caption: string;
+      imageUrl: string;
+      userName: string;
+    };
+  }
+
 const AddPost = () => {
-    const fileInputRef = useRef(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const [caption, setCaption] = useState('')
-    const [image, setUploadImage] = useState(null)
-    const [user, setUser] = useState(null)
-    const [message, setMessage] = useState()
-    const [postList, setPostList] = useState([])
+    const [image, setUploadImage] = useState<File | null>(null);
+    const [user, setUser] = useState<firebase.User | null>(null);
+    const [message, setMessage] = useState('')
+    const [postList, setPostList] = useState<PostData[]>([]);
     useEffect(() => {
-        db.collection("posts")
-            .orderBy("timestamp", "desc")
-            .onSnapshot((snapshot) => {
-                setPostList(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        post: doc.data(),
-                    }))
-                );
-            });
-    }, [])
+        const unsubscribe = db.collection("posts")
+          .orderBy("timestamp", "desc")
+          .onSnapshot((snapshot) => {
+            setPostList(
+              snapshot.docs.map((doc) => ({
+                id: doc.id,
+                post: doc.data() as {
+                  timestamp: firebase.firestore.Timestamp;
+                  caption: string;
+                  imageUrl: string;
+                  userName: string;
+                },
+              }))
+            );
+          });
+    
+        return () => {
+          unsubscribe();
+        };
+      }, []);
     useEffect(() => {
         const checkIfUserLoggedIn = auth.onAuthStateChanged((authuser) => {
             if (authuser) {
@@ -43,11 +61,10 @@ const AddPost = () => {
     }, [])
 
     // Image  Upload
-    const handleChange = (e) => {
-
-        // Checked If file is upload or not
-        if (e.target.files[0]) {
-            setUploadImage(e.target.files[0])
+    const handleChange = (e : ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.files && e.target.files[0]) {
+          const uploadedImage = e.target.files[0];
+          setUploadImage(uploadedImage);
         }
     }
 
@@ -64,24 +81,24 @@ const AddPost = () => {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     caption: caption,
                     imageUrl: downloadUrl,
-                    userName: user.displayName
+                    userName: user?.displayName
                 });
                 setMessage('Post uploaded successfully')
                 setTimeout(() => {
-                    setMessage(null)
+                    setMessage('')
                   }, 1000);
                 setCaption('')
             resetFileInput();
             } catch(error){
                 setMessage('Post Upload Failed')
                 setTimeout(() => {
-                    setMessage(null)
+                    setMessage('')
                   }, 1000);
             }
         }else{
             setMessage('Please add image and caption')
             setTimeout(() => {
-                setMessage(null)
+                setMessage('')
               }, 1000);
         }
     }

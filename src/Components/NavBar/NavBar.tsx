@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import './NavBar.css'
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar'
-import home from "../../assets/images/home.svg"
-import find from "../../assets/images/find.svg"
-import react from "../../assets/images/love.svg"
-import profile from "../../assets/images/pp1.png"
-
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import {auth} from '../../firebase'
+// import home from "../../assets/images/home.svg"
+// import profile from "../../assets/images/pp1.png"
+// import firebase from 'firebase/compat/app';
+import firebase from "../../firebase"
+import 'firebase/compat/auth';
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Input } from "antd";
+const home = require("../../assets/images/home.svg") as string;
+const profile = require("../../assets/images/pp1.png") as string;
+const auth = firebase.auth();
 const NavBar = () => {
     const navigate = useNavigate();
     const userHandleLogout = async () => {
@@ -22,7 +22,7 @@ const NavBar = () => {
             alert(error)
         }
     }
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState<firebase.User | null>(null);
     useEffect(() => {
         const checkIfUserLoggedIn = auth.onAuthStateChanged((authuser) => {
             if(authuser){
@@ -53,8 +53,6 @@ const NavBar = () => {
                     <Grid item xs={4}>
                         <div className="navbar-navigation">
                             <Link to='/home'><img className="navbar-img" src={home}/></Link>
-                            {/* <img className="navbar-img" src={find} />
-                            <img className="navbar-img" src={react} /> */}
                             <Link to="/profile"><Avatar className="avatar navbar-img" src={profile}/></Link>
                             {user && <Button className="logout-btn" onClick={userHandleLogout} type="primary">Logout</Button>}
                         </div>

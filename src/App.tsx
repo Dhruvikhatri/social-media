@@ -1,5 +1,5 @@
+import React from 'react';
 import './App.css';
-import { lazy } from "react";
 import Home from './Components/HomePage/home';
 import LoginPage  from './Components/LoginPage/LoginPage';
 import SignUpPage from './Components/SignupPage/signup'
@@ -10,14 +10,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-          <Route exact path="/login" element={<LoginPage/>}/>
-          <Route exact path="/home" element={<Home/>}/>
-          <Route exact path="/signup" element={<SignUpPage/>}/>
-          <Route exact path="/profile" element={<Profile/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/signup" element={<SignUpPage/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/" element={<LoginPage/>} />
       </Routes>
       </BrowserRouter>
-      {/* <LoginPage/> */}
     </div>
   );
 }

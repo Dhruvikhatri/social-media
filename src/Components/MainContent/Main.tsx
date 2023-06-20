@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import './Main.css'
 import Grid from '@mui/material/Grid';
-import Post from "../Post/Post";
-import uploadposticon from "../../assets/images/upload.png"
+// import uploadposticon from "../../assets/images/upload.png"
 import AddPost from "../Post/AddPost";
 const Main = () => {
-
     return(
         <div>
             <Grid container>

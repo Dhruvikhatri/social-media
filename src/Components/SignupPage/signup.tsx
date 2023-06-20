@@ -1,39 +1,54 @@
-import React, {useState} from "react";
-import './LoginPage.css'
-import { Button, Form, Input, Space } from "antd";
-import firebase from 'firebase/compat/app'
+import React, { useState } from "react";
+// import firebase from 'firebase/compat/app'
+import firebase from "../../firebase"
 import 'firebase/compat/auth'
-import {auth} from '../../firebase'
+import { Button, Form, Input, Space } from "antd";
 import Grid from '@mui/material/Grid';
+import './signup.css'
 import { useNavigate, Link } from "react-router-dom";
-const LoginPage = () => {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+const auth = firebase.auth();
+const SignUpPage = () => {
+    const [username, setusername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const navigate = useNavigate();
-    const Login = (e) => {
+    const signUp = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        auth.signInWithEmailAndPassword(email, password)
-            .then((res) => {
-                console.log(res)
-                navigate("/home");
-            })
-            .catch((e) => {
-                console.log(e.message)
-                alert(e.message)
-            })
+        try {
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((authUser) => {
+                    if (authUser?.user) {
+                        return authUser.user.updateProfile({
+                            displayName: username
+                        });
+                    }
+                    return null;
+                })
+            navigate("/login")
+        } catch (error: any) {
+            alert(error?.message)
+        }
 
     }
-
     return (
         <div>
+            {/* <AddPost username={}/> */}
             <Grid container>
                 <Grid item xs={3}></Grid>
                 <Grid item xs={6} className="Loginpage-grid">
                     <div className="Loginpage-main">
                         <h2>Welcome to Social Media</h2>
                         <div className="loginpage-signin">
-                            <div className="login-content" onSubmit={Login}>
-                                <form>
+                            <div className="login-content">
+                                <form onSubmit={signUp}>
+                                    <Input
+                                        name="fullname"
+                                        type="text"
+                                        className="signup-fullname"
+                                        placeholder="Please enter full name"
+                                        value={username}
+                                        onChange={(e) => setusername(e.target.value)}
+                                    />
                                     <Input
                                         name="email"
                                         type="email"
@@ -48,7 +63,7 @@ const LoginPage = () => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <Button className="loginpage-btn" htmlType="submit" type="primary">Login</Button>
+                                    <Button className="loginpage-btn" htmlType="submit" type="primary">Sign up</Button>
                                 </form>
                             </div>
                             <div className="loginpage-or">
@@ -58,7 +73,7 @@ const LoginPage = () => {
                                 <div>Forgot password?</div>
                             </div>
                             <div className="login-signup">
-                            <div className="signup-txt">Don't have an account? <span><Link to="/signup">{"SignUp"}</Link></span></div>
+                                <div className="signup-txt">Have an account <span><Link to="/">{"Login"}</Link></span></div>
                             </div>
                         </div>
                     </div>
@@ -68,4 +83,4 @@ const LoginPage = () => {
         </div>
     )
 }
-export default LoginPage
+export default SignUpPage

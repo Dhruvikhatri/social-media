@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 import firebase from 'firebase/compat/app'
-import initializeApp from 'firebase/compat/app'
+// import initializeApp from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/storage'
 import 'firebase/compat/firestore'
@@ -15,9 +15,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth()
-const storage = firebase.storage()
-const db = app.firestore()
-export {auth, storage, db}
+// const auth = firebase.auth()
+// const storage = firebase.storage()
+// const db = firebase.firestore();
+// export default {auth, storage, db }
+export default firebase
